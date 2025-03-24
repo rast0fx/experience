@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Military Experience Portfolio</title>
+    <title>Roblox Experience </title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         /* Reset and base styles */
@@ -287,7 +287,7 @@
 <body>
     <header>
         <nav>
-            <div class="logo">Military Experience</div>
+            <div class="logo">Roblox Experience</div>
             <ul class="nav-links">
                 <li><a href="#about">About</a></li>
                 <li><a href="#experience">Experience</a></li>
@@ -306,7 +306,7 @@
             <h2>About Me</h2>
             <div class="about-content">
                 <div class="about-text">
-                    <p>Dedicated military professional with extensive experience in both the United States Army Reserve (USAR) and United States Air Force (USAF). Proven track record in leadership, training, and operational excellence across multiple specialized units.</p>
+                    <p>Dedicated Army/Air Force professional with extensive experience in both the United States Army Reserve (USAR) and United States Air Force (USAF). Proven track record in leadership, training, and operational excellence across multiple specialized units.</p>
                 </div>
             </div>
         </section>
@@ -361,6 +361,10 @@
                             <p>SCO, GCO, DCoS, CoS, CCMS</p>
                         </div>
                         <div class="unit">
+                            <h4>Air Force Special Operations Command (AFSOC)</h4>
+                            <p>DCoS</p>
+                        </div>
+                        <div class="unit">
                             <h4>Air Force Public Affairs (AFPA)</h4>
                             <p>REP, XO, CO</p>
                         </div>
@@ -382,7 +386,7 @@
         </section>
 
         <section id="awards" class="awards">
-            <h2>Military Awards</h2>
+            <h2>Awards</h2>
             <div class="awards-grid">
                 <div class="awards-card">
                     <h3>USAF Awards</h3>
@@ -513,16 +517,16 @@
 
         window.addEventListener('scroll', () => {
             let current = '';
-            
+
             sections.forEach(section => {
                 const sectionTop = section.offsetTop;
                 const sectionHeight = section.clientHeight;
-                
+
                 if (pageYOffset >= sectionTop - 60) {
                     current = section.getAttribute('id');
                 }
             });
-            
+
             navItems.forEach(item => {
                 item.classList.remove('active');
                 if (item.getAttribute('href').slice(1) === current) {
