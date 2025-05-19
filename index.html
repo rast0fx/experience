@@ -3,324 +3,376 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Roblox Experience </title>
+    <title>Roblox Experience | rast0fx</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-<link
-      rel="icon"
-      href="https://i.postimg.cc/QtTPwrsH/hd-new-roblox-logo-icon-png-7017516947874640u7jdms7jd-removebg-preview.png"
-      type="image/png"
-    />
+    <link rel="icon" href="https://i.postimg.cc/QtTPwrsH/hd-new-roblox-logo-icon-png-7017516947874640u7jdms7jd-removebg-preview.png" type="image/png" />
     <style>
-        /* Reset and base styles */
+        :root {
+            --primary: #8e9ba8;
+            --secondary: #003366;
+            --accent: #00aaff;
+            --dark: #1a1a1a;
+            --light: #ffffff;
+            --glass: rgba(255, 255, 255, 0.95);
+            --shadow: rgba(0, 0, 0, 0.1);
+            --card-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            --transition: all 0.3s ease;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        html {
-            scroll-behavior: smooth;
-        }
-
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
-            color: #333;
-            background-color: #f5f5f5;
-            padding-top: 70px;
+            color: var(--dark);
+            min-height: 100vh;
+            padding-top: 80px;
+            background: linear-gradient(135deg, var(--secondary), var(--primary), var(--accent));
+            background-size: 300% 300%;
+            animation: gradient 15s ease infinite;
         }
 
-        /* Header and Navigation */
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Fixed Header */
         header {
             position: fixed;
-            width: 100%;
             top: 0;
+            left: 0;
+            width: 100%;
             z-index: 1000;
-            background-color: rgba(255, 255, 255, 0.95);
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px var(--shadow);
         }
 
-        nav {
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1rem 5%;
-            max-width: 1200px;
-            margin: 0 auto;
         }
 
         .logo {
             font-size: 1.5rem;
             font-weight: bold;
-            color: #2c3e50;
+            color: var(--secondary);
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        #utc-time {
+            background: var(--primary);
+            color: var(--light);
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            font-family: monospace;
         }
 
         .nav-links {
             display: flex;
+            gap: 2rem;
             list-style: none;
-        }
-
-        .nav-links li {
-            margin-left: 2rem;
         }
 
         .nav-links a {
             text-decoration: none;
-            color: #2c3e50;
+            color: var(--secondary);
             font-weight: 500;
-            transition: color 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: var(--transition);
         }
 
         .nav-links a:hover {
-            color: #3498db;
+            background: var(--primary);
+            color: var(--light);
         }
 
-        .burger {
-            display: none;
-            cursor: pointer;
+        /* Main Content */
+        section {
+            margin: 2rem auto;
+            max-width: 1400px;
+            padding: 2rem;
+            background: var(--glass);
+            border-radius: 15px;
+            box-shadow: var(--card-shadow);
         }
 
-        .burger div {
-            width: 25px;
-            height: 3px;
-            background-color: #2c3e50;
-            margin: 5px;
-            transition: all 0.3s ease;
-        }
-
-        /* About Section */
-        .about {
-            padding: 5rem 1rem;
-            background-color: white;
-        }
-
-        .about h2 {
+        .section-title {
             text-align: center;
+            color: var(--secondary);
+            font-size: 2.5rem;
             margin-bottom: 3rem;
-            color: #2c3e50;
+            position: relative;
         }
 
-        .about-content {
-            max-width: 1200px;
-            margin: 0 auto;
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 2px;
         }
 
-        .about-text {
-            text-align: center;
-            max-width: 800px;
-            margin: 0 auto;
-            font-size: 1.1rem;
-            color: #555;
-        }
-
-        /* Experience Section */
-        .experience {
-            padding: 5rem 1rem;
-            background-color: #f9f9f9;
-        }
-
-        .experience h2 {
-            text-align: center;
-            margin-bottom: 3rem;
-            color: #2c3e50;
-        }
-
-        .experience-grid {
+        .grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
+            padding: 1rem;
         }
 
-        .experience-card {
-            background-color: white;
-            border-radius: 10px;
+        .card {
+            background: var(--light);
+            border-radius: 15px;
             padding: 2rem;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 5px 15px var(--shadow);
+            transition: var(--transition);
         }
 
-        .experience-card h3 {
-            color: #2c3e50;
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px var(--shadow);
+        }
+
+        .card h3 {
+            color: var(--secondary);
             margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            border-bottom: 3px solid var(--primary);
             padding-bottom: 0.5rem;
-            border-bottom: 2px solid #3498db;
         }
 
-        .experience-card h3 a {
-            color: #2c3e50;
-            text-decoration: none;
-            transition: color 0.3s ease;
+        .showcase-image {
+            width: 100%;
+            height: 300px;
+            object-fit: contain;
+            border-radius: 10px;
+            margin: 1rem 0;
+            background-color: #f5f5f5;
+            padding: 10px;
         }
 
-        .experience-card h3 a:hover {
-            color: #3498db;
+        /* Experience Content */
+        .experience-content {
+            margin-top: 2rem;
         }
 
         .unit {
             margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.02);
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+
+        .unit:hover {
+            background: rgba(0, 0, 0, 0.05);
         }
 
         .unit h4 {
-            color: #2c3e50;
+            color: var(--primary);
             margin-bottom: 0.5rem;
+            font-size: 1.1rem;
         }
 
-        .unit p {
-            color: #666;
-            font-size: 0.95rem;
-        }
-
-        /* Awards Section */
-        .awards {
-            padding: 5rem 1rem;
-            background-color: white;
-        }
-
-        .awards h2 {
-            text-align: center;
-            margin-bottom: 3rem;
-            color: #2c3e50;
-        }
-
-        .awards-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .awards-card {
-            background-color: #f9f9f9;
-            border-radius: 10px;
-            padding: 2rem;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .awards-card h3 {
-            color: #2c3e50;
-            margin-bottom: 1.5rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid #3498db;
-        }
-
+        /* Awards */
         .award-category {
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
         }
 
         .award-category h4 {
-            color: #2c3e50;
-            margin-bottom: 0.8rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+            border-left: 3px solid var(--primary);
+            padding-left: 1rem;
         }
 
         .award-category ul {
             list-style: none;
+            padding-left: 2rem;
         }
 
         .award-category ul li {
-            color: #666;
             margin-bottom: 0.5rem;
-            padding-left: 1.5rem;
             position: relative;
         }
 
         .award-category ul li::before {
-            content: "•";
-            color: #3498db;
+            content: '•';
+            color: var(--primary);
             position: absolute;
-            left: 0;
+            left: -1rem;
+        }
+
+        /* Links */
+        .links-container {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 1rem auto 0;
+            flex-wrap: wrap;
+            width: 100%;
+        }
+
+        .links-container a {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: var(--primary);
+            color: var(--light);
+            text-decoration: none;
+            border-radius: 5px;
+            transition: var(--transition);
+        }
+
+        .links-container a:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
         }
 
         /* Responsive Design */
         @media screen and (max-width: 768px) {
-            .nav-links {
-                position: fixed;
-                right: -100%;
-                top: 70px;
-                height: calc(100vh - 70px);
-                background-color: rgba(255, 255, 255, 0.95);
+            .header-content {
                 flex-direction: column;
+                padding: 1rem;
+            }
+
+            .nav-links {
+                margin-top: 1rem;
                 width: 100%;
-                text-align: center;
-                transition: right 0.5s ease;
+                justify-content: center;
+                flex-wrap: wrap;
             }
 
-            .nav-links.active {
-                right: 0;
+            .user-info {
+                margin-top: 1rem;
             }
 
-            .nav-links li {
-                margin: 2rem 0;
+            section {
+                margin: 1rem;
+                padding: 1rem;
             }
 
-            .burger {
-                display: block;
-            }
-
-            .experience-grid,
-            .awards-grid {
+            .grid {
                 grid-template-columns: 1fr;
             }
-        }
-
-        /* Animations */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .about-content,
-        .experience-grid,
-        .awards-grid {
-            animation: fadeIn 1s ease-out;
-        }
-
-        /* Active Navigation Link */
-        .nav-links a.active {
-            color: #3498db;
-            font-weight: bold;
         }
     </style>
 </head>
 <body>
     <header>
-        <nav>
+        <div class="header-content">
             <div class="logo">Roblox Experience</div>
-            <ul class="nav-links">
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#work">Professional Experience</a></li>
+                    <li><a href="#experience">Armed Forces Experience</a></li>
+                    <li><a href="#awards">Armed Forces Awards</a></li>
+                </ul>
+            </nav>
+            <div class="user-info">
+                <span id="utc-time">2025-05-19 19:18:19</span>
                 
-                <li><a href="#experience">Experience</a></li>
-                <li><a href="#awards">Awards</a></li>
-            </ul>
-            <div class="burger">
-                <div class="line1"></div>
-                <div class="line2"></div>
-                <div class="line3"></div>
             </div>
-        </nav>
+        </div>
     </header>
 
     <main>
-       
+        <section id="work">
+            <h2 class="section-title">Professional Experience</h2>
+            <div class="grid">
+                <!-- SharpVision Card -->
+                <div class="card">
+                    <h3>SharpVision</h3>
+                    <p>Website Developer </p>
+                    <img src="https://i.postimg.cc/zf4hngTN/image.png" alt="SharpVision" class="showcase-image">
+                    <div class="links-container">
+                        <a href="https://discord.gg/sharpvision" target="_blank">
+                            <i class="fab fa-discord"></i>Discord
+                        </a>
+                        <a href="https://www.roblox.com/communities/13317009/SharpVision#!/about" target="_blank">
+                            <i class="fas fa-gamepad"></i>Roblox
+                        </a>
+                    </div>
+                </div>
 
-        <section id="experience" class="experience">
-            <h2>Roblox Experience</h2>
-            <div class="experience-grid">
-                <div class="experience-card">
-                    <h3><a href="https://discord.gg/BCEwJMqAyj">United States Army (USAR)</a></h3>
+                <!-- Frontier Threads Card -->
+                <div class="card">
+                    <h3>Frontier Threads</h3>
+                    <p>Manager</p>
+                    <img src="https://i.postimg.cc/GtQswsDW/image.png" alt="Frontier Threads" class="showcase-image">
+                    <div class="links-container">
+                        <a href="https://discord.gg/kPNQewvbVc" target="_blank">
+                            <i class="fab fa-discord"></i>Discord
+                        </a>
+                        <a href="https://www.roblox.com/communities/34108114/Frontier-Threads#!/about" target="_blank">
+                            <i class="fas fa-gamepad"></i>Roblox
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Radcat Productions Card -->
+                <div class="card">
+                    <h3>Radcat Productions</h3>
+                    <p>Website Developer</p>
+                    <img src="https://i.postimg.cc/QC4xJg1d/raw.webp" alt="Radcat Productions" class="showcase-image">
+                    <div class="links-container">
+                        <a href="https://discord.gg/fVU6zGWpCk" target="_blank">
+                            <i class="fab fa-discord"></i>Discord
+                        </a>
+                    
+                        <a href="https://rast0fx.github.io/Radcat.co/" target="_blank">
+                            <i class="fa-solid fa-globe"></i></i>Website
+                        </a>
+                    
+                </div>
+            </div>
+        </section>
+
+        <section id="experience">
+            <h2 class="section-title">Armed Forces Experience</h2>
+            <div class="grid">
+                <!-- USAR Card -->
+                <div class="card">
+                    <h3>United States Army (USAR)</h3>
+                    <img src="https://i.postimg.cc/Mpy0dX38/image.png" alt="USAR" class="showcase-image">
+                    <div class="links-container">
+                        <a href="https://discord.gg/BCEwJMqAyj" target="_blank">
+                            <i class="fab fa-discord"></i>Discord
+                        </a>
+                        <a href="https://www.roblox.com/communities/3108077/United-States-Army#!/about" target="_blank">
+                            <i class="fas fa-gamepad"></i>Roblox
+                        </a>
+                    </div>
                     <div class="experience-content">
-<div class="unit">
+                        <div class="unit">
                             <h4>John F. Kennedy Special Warfare Center and School (JFKSWCS)</h4>
                             <p>Artemis: CFS, CXO, CCO (Held SOTWx2)</p>
                             <p>1SWTG: Sergeant Major</p>
-                            <p>1SWTG: Executive Officer </p>
-<p>(Held SOTWx7)</p>
+                            <p>1SWTG: Executive Officer</p>
+                            <p>(Held SOTWx7)</p>
                         </div>
                         <div class="unit">
                             <h4>1st Cavalry Division (Palehorse)</h4>
@@ -334,25 +386,32 @@
                             <h4>Military Police Corps (MPC)</h4>
                             <p>EPD DS, RRAU SP, EVOC SCI</p>
                         </div>
-                        <div class="unit">
-                            <h4>Instructor (INS) / Senior Instructor (SI)</h4>
-                            <p>Active role in most training units, providing expertise in tactical operations and leadership development.</p>
-                        </div>
+                      
                         <div class="unit">
                             <h4>HRC, ASCC</h4>
                             <p>Community Host</p>
                         </div>
-<div class="unit">
+                        <div class="unit">
                             <h4>HRC, AFA</h4>
                             <p>Representative</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="experience-card">
-                    <h3><a href="https://discord.gg/Gek24gyBTS">United States Air Force (USAF)</a></h3>
+                <!-- USAF Card -->
+                <div class="card">
+                    <h3>United States Air Force (USAF)</h3>
+                    <img src="https://i.postimg.cc/85ymM3KJ/image.png" alt="USAF" class="showcase-image">
+                    <div class="links-container">
+                        <a href="https://discord.gg/Gek24gyBTS" target="_blank">
+                            <i class="fab fa-discord"></i>Discord
+                        </a>
+                        <a href="https://www.roblox.com/communities/33334312/United-Stat-s-ir-Forc#!/about" target="_blank">
+                            <i class="fas fa-gamepad"></i>Roblox
+                        </a>
+                    </div>
                     <div class="experience-content">
-<div class="unit">
+                        <div class="unit">
                             <h4>Air Staff (AS) and Joint Chiefs of Staff (JCoS)</h4>
                             <p>CMSAF, VCSAF, CSAF, VCJCS, A-CJCS</p>
                         </div>
@@ -384,17 +443,16 @@
                             <h4>Community Staff (CS)</h4>
                             <p>Events Host, Senior Moderator, Moderation Team Supervisor, Chief of Operations</p>
                         </div>
-                        
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="awards" class="awards">
-            <h2>Awards</h2>
-            <div class="awards-grid">
-                
-                <div class="awards-card">
+        <section id="awards">
+            <h2 class="section-title">Armed Forces Awards</h2>
+            <div class="grid">
+                <!-- USAR Awards Card -->
+                <div class="card">
                     <h3>USAR Awards</h3>
                     <div class="awards-content">
                         <div class="award-category">
@@ -425,25 +483,29 @@
                                 <li>Air Assault Badge</li>
                                 <li>Pathfinder Badge</li>
                                 <li>Military Freefall Badge</li>
-                                <li>4x OSB</li>
+                                
                             </ul>
                         </div>
                         <div class="award-category">
                             <h4>Identification Badges</h4>
                             <ul>
                                 <li>Basic Army Instructor Identification Badge</li>
-                                <li>82nd/1stCAV/JFKSWCS/75th/ASF Combat Service Identification Badge</li>
+                                <li>82nd/1stCAV/JFKSWCS/75th Combat Service Identification Badge</li>
                             </ul>
                         </div>
-                         <div class="award-category">
+                        <div class="award-category">
                             <h4>Other</h4>
                             <ul>
                                 <li>Ranger Tab</li>
+                                <li>4x OSB</li>
+                                <li>Basic ROKA Jump Wings</li>
                             </ul>
                         </div>
                     </div>
                 </div>
-<div class="awards-card">
+
+                <!-- USAF Awards Card -->
+                <div class="card">
                     <h3>USAF Awards</h3>
                     <div class="awards-content">
                         <div class="award-category">
@@ -457,10 +519,10 @@
                                 <li>Armed Forces Expeditionary Medal</li>
                                 <li>Global War on Terrorism Expeditionary</li>
                                 <li>Global War on Terrorism Service</li>
-                                <li>Outstanding Volunteer x2 </li>
+                                <li>Outstanding Volunteer x2</li>
                                 <li>Air Force Longevity Service</li>
                                 <li>Basic Military Instructor Ribbon</li>
-                                <li>Outstanding Airman Award x2 </li>
+                                <li>Outstanding Airman Award x2</li>
                                 <li>National Defense Service</li>
                             </ul>
                         </div>
@@ -492,61 +554,19 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </section>
     </main>
 
     <script>
-        // Mobile menu toggle
-        const burger = document.querySelector('.burger');
-        const nav = document.querySelector('.nav-links');
-        const navLinks = document.querySelectorAll('.nav-links li');
-
-        burger.addEventListener('click', () => {
-            // Toggle navigation
-            nav.classList.toggle('active');
-
-            // Animate links
-            navLinks.forEach((link, index) => {
-                if (link.style.animation) {
-                    link.style.animation = '';
-                } else {
-                    link.style.animation = `navLinkFade 0.5s ease forwards ${index / 7 + 0.3}s`;
-                }
-            });
-        });
-
-        // Close mobile menu when clicking a link
-        navLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                nav.classList.remove('active');
-            });
-        });
-
-        // Add active class to navigation links based on scroll position
-        const sections = document.querySelectorAll('section');
-        const navItems = document.querySelectorAll('.nav-links a');
-
-        window.addEventListener('scroll', () => {
-            let current = '';
-
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-
-                if (pageYOffset >= sectionTop - 60) {
-                    current = section.getAttribute('id');
-                }
-            });
-
-            navItems.forEach(item => {
-                item.classList.remove('active');
-                if (item.getAttribute('href').slice(1) === current) {
-                    item.classList.add('active');
-                }
-            });
-        });
+        function updateUTCTime() {
+            const now = new Date();
+            const utcString = now.toISOString().slice(0, 19).replace('T', ' ');
+            document.getElementById('utc-time').textContent = utcString;
+        }
+        
+        setInterval(updateUTCTime, 1000);
+        updateUTCTime();
     </script>
 </body>
-</html> 
+</html>
